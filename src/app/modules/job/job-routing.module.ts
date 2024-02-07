@@ -4,12 +4,36 @@
 
   const routes: Routes = [
     {
-      component: LayoutComponent,
+      path: '',
       data: {
         layout: 'navigate'
       },
-      path: '',
-      loadChildren: () => import('./job-list/job-list.module').then(i => i.ListModule),
+      component: LayoutComponent,
+      loadChildren: () => import('./job-list/job-list.module').then(i => i.JobListModule),
+    },
+    {
+      path: 'create',
+      data: {
+        layout: 'navigate'
+      },
+      component: LayoutComponent,
+      loadChildren: () => import('./job-create/job-create.module').then(i => i.JobCreateModule),
+    },
+    {
+      path: 'application',
+      data: {
+        layout: 'navigate'
+      },
+      component: LayoutComponent,
+      loadChildren: () => import('./job-application/job-application.module').then(i => i.JobApplicationModule),
+    },
+    {
+      path: 'detail/:id',
+      data: {
+        layout: 'navigate'
+      },
+      component: LayoutComponent,
+      loadChildren: () => import('./job-detail/job-detail.module').then(i => i.JobDetailModule),
     },
   ];
 

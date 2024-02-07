@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { routes } from './job-list.routing'
+import { routes } from './job-create.routing'
 import { RouterModule } from '@angular/router';
 
 
@@ -12,4 +12,4 @@ import { RouterModule } from '@angular/router';
     CommonModule
   ]
 })
-export class JobListModule { }
+export class JobCreateModule { }

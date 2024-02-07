@@ -7,15 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigateComponent implements OnInit {
 
-  public isMenuOpen = false;
-
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
 
 }

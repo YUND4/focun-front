@@ -5,11 +5,10 @@ const MAIN = '/jobs';
 
 const routes: Routes = [
   { path: '', redirectTo: MAIN, pathMatch: 'full' },
-  {
-    path: '',loadChildren: () => import('./feature/feature.module').then(i => i.FeatureModule),
-  },
-  { path: '**', redirectTo: MAIN, pathMatch: 'full' },
+  { path: 'auth',loadChildren: () => import('./modules/auth/auth.module').then(i => i.AuthModule) },
+  { path: 'user', loadChildren: () => import('./modules/user/user.module').then(i => i.UserModule) },
   { path: 'jobs', loadChildren: () => import('./modules/job/job.module').then(i => i.JobsModule) },
+  { path: '**', redirectTo: MAIN, pathMatch: 'full' },
 ];
 
 @NgModule({

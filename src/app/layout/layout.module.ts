@@ -10,6 +10,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
+import { FooterComponent } from '../components/footer/footer.component';
 
 
 
@@ -17,7 +19,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
   declarations: [
     LayoutComponent,
     EmptyComponent,
-    NavigateComponent
+    NavigateComponent,
+    NavBarComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
