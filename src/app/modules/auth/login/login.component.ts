@@ -11,10 +11,6 @@ import { AuthService } from '@core/auth/auth.service';
 export class LoginComponent implements OnInit {
   @ViewChild('loginNgForm') loginNgForm: NgForm;
 
-  // alert: { type: FuseAlertType; message: string } = {
-  //   type: 'success',
-  //   message: ''
-  // };
   loginForm: FormGroup;
   showAlert: boolean = false;
 
@@ -40,8 +36,7 @@ export class LoginComponent implements OnInit {
     // Create the form
     this.loginForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      rememberMe: ['']
+      password: ['', Validators.required]
     });
   }
 
@@ -52,7 +47,7 @@ export class LoginComponent implements OnInit {
   /**
    * Sign in
    */
-  signIn(): void {
+  login(): void {
     // Return if the form is invalid
     if (this.loginForm.invalid) {
       return;
@@ -73,7 +68,7 @@ export class LoginComponent implements OnInit {
           // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
           // to the correct page after a successful sign in. This way, that url can be set via
           // routing file and we don't have to touch here.
-          const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/signed-in-redirect';
+          const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/jobs';
 
           // Navigate to the redirect url
           this._router.navigateByUrl(redirectURL);
@@ -81,17 +76,13 @@ export class LoginComponent implements OnInit {
         },
         (response) => {
 
+          console.log(response)
+
           // Re-enable the form
           this.loginForm.enable();
 
           // Reset the form
           this.loginNgForm.resetForm();
-
-          // Set the alert
-          // this.alert = {
-          //   type: 'error',
-          //   message: 'Correo electronico o contraseña invalida'
-          // };
 
           // Show the alert
           this.showAlert = true;

@@ -18,10 +18,10 @@
               placeholder="Email Address" matInput [formControlName]="'email'" />
         </div>
         <mat-error *ngIf="loginForm.get('email').hasError('required')">
-          El Usuario es obligatorio
+          Email is required
         </mat-error>
         <mat-error *ngIf="loginForm.get('email').hasError('email')">
-          Por favor digita un Usuario valido
+          Email is invalid
         </mat-error>
         <div class="flex items-center border-2 mb-1 py-2 px-3 rounded-2xl ">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
@@ -36,11 +36,11 @@
         </div>
         
         <mat-error *ngIf="loginForm.get('password').hasError('required')">
-          La contraseña es obligatoria
+          Password is required
         </mat-error>
         <button type="submit"
           class="block w-full bg-blue-500 mt-5 py-2 mt-11 rounded-md hover:bg-blue-400 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2"
-          [disabled]="loginForm.disabled" (click)="signIn()">
+          [disabled]="loginForm.disabled" (click)="login()">
           <span *ngIf="!loginForm.disabled">Login</span>
           <mat-progress-spinner *ngIf="loginForm.disabled" [diameter]="24"
             [mode]="'indeterminate'"></mat-progress-spinner>

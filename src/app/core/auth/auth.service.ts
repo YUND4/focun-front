@@ -35,6 +35,21 @@ export class AuthService
         return localStorage.getItem('accessToken') ?? '';
     }
 
+    set refreshToken(token: string)
+    {
+        localStorage.setItem('refreshToken', token);
+    }
+
+    get refreshToken(): string
+    {
+        return localStorage.getItem('refreshToken') ?? '';
+    }
+
+    get isAuthenticated(): boolean
+    {
+        return !!this.accessToken
+    }
+
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
@@ -72,11 +87,12 @@ export class AuthService
             return throwError('User is already logged in.');
         }
 
-        return this._httpClient.post(`${BASE_URL}/api/auth/login`, credentials).pipe(
+        return this._httpClient.post(`${BASE_URL}/auth/`, credentials).pipe(
             switchMap((response: any) => {
 
                 // Store the access token in the local storage
-                this.accessToken = response.access_token;
+                this.accessToken = response.access;
+                this.refreshToken = response.refresh;
 
                 // Set the authenticated flag to true
                 this._authenticated = true;
@@ -93,20 +109,18 @@ export class AuthService
     signInUsingToken(): Observable<any>
     {
         // Renew token
-        return this._httpClient.post(`${BASE_URL}/api/auth/refresh`, {}, {
-          headers: {
-            Authorization: 'Bearer ' + this.accessToken
-          }
+        return this._httpClient.post(`${BASE_URL}/auth/refresh/`, {
+            refresh: this.refreshToken
         }).pipe(
-            catchError(() =>
+            catchError(() =>{
 
                 // Return false
-                of(false)
-            ),
+                return of(false)
+            }),
             switchMap((response: any) => {
 
                 // Store the access token in the local storage
-                this.accessToken = response.access_token;
+                this.accessToken = response.access;
 
                 // Set the authenticated flag to true
                 this._authenticated = true;
@@ -139,7 +153,7 @@ export class AuthService
      */
     signUp(user: { name: string; email: string; password: string; company: string }): Observable<any>
     {
-        return this._httpClient.post('api/auth/sign-up', user);
+        return this._httpClient.post('/users/', user);
     }
 
     /**
@@ -172,10 +186,10 @@ export class AuthService
         // Check the access token expire date
         if ( AuthUtils.isTokenExpired(this.accessToken) )
         {
-            return of(false);
+            return this.signInUsingToken();
         }
 
         // If the access token exists and it didn't expire, sign in using it
-        return this.signInUsingToken();
+        return of(true);
     }
 }

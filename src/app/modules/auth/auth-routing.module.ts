@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TokenGuard } from '@core/guard/token/token.guard';
+import { LogoutGuard } from '@core/guard/logout/logout.guard';
 import { LayoutComponent } from 'src/app/layout/layout.component';
 
 const routes: Routes = [
@@ -20,6 +20,14 @@ const routes: Routes = [
     component: LayoutComponent,
     loadChildren: () => import('./sign-up/sign-up.module').then(i => i.SignUpModule),
   },
+  {
+    path: 'logout',
+    canActivate: [LogoutGuard],
+    data: {
+      layout: 'empty'
+    },
+    component: LayoutComponent,
+  }
 ];
 
 @NgModule({

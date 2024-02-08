@@ -4,7 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutModule } from './layout/layout.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserService } from '@core/user/user.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BaseInterceptor } from '@core/base/base.interceptor';
+import { AuthService } from '@core/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -14,10 +17,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    LayoutModule,
-    BrowserAnimationsModule
+    LayoutModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: BaseInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

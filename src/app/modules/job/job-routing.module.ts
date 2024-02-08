@@ -1,5 +1,7 @@
   import { NgModule } from '@angular/core';
   import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@core/guard/auth/auth.guard';
+import { NoAuthGuard } from '@core/guard/auth/noAuth.guard';
   import { LayoutComponent } from 'src/app/layout/layout.component';
 
   const routes: Routes = [
@@ -16,6 +18,7 @@
       data: {
         layout: 'navigate'
       },
+      canActivate: [AuthGuard],
       component: LayoutComponent,
       loadChildren: () => import('./job-create/job-create.module').then(i => i.JobCreateModule),
     },
@@ -24,6 +27,7 @@
       data: {
         layout: 'navigate'
       },
+      canActivate: [AuthGuard],
       component: LayoutComponent,
       loadChildren: () => import('./job-application/job-application.module').then(i => i.JobApplicationModule),
     },
@@ -32,6 +36,7 @@
       data: {
         layout: 'navigate'
       },
+      canActivate: [AuthGuard],
       component: LayoutComponent,
       loadChildren: () => import('./job-detail/job-detail.module').then(i => i.JobDetailModule),
     },

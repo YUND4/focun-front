@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { JobRoutingModule } from './job-routing.module';
 import { JobApplicationComponent } from './job-application/job-application.component';
 
@@ -10,9 +9,8 @@ import { JobApplicationComponent } from './job-application/job-application.compo
     JobApplicationComponent
   ],
   imports: [
-    CommonModule,
     JobRoutingModule
   ]
 })
 
-export class JobsModule { }
+export class JobModule { }

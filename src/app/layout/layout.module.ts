@@ -12,6 +12,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { FooterComponent } from '../components/footer/footer.component';
+import { UserService } from '@core/user/user.service';
+import { BaseInterceptor } from '@core/base/base.interceptor';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthService } from '@core/auth/auth.service';
+import { AuthModule } from '../modules/auth/auth.module';
 
 
 
@@ -24,6 +29,7 @@ import { FooterComponent } from '../components/footer/footer.component';
     FooterComponent
   ],
   imports: [
+    HttpClientModule,
     CommonModule,
     RouterModule,
     MatToolbarModule,
@@ -32,6 +38,9 @@ import { FooterComponent } from '../components/footer/footer.component';
     MatSidenavModule,
     MatListModule,
     MatExpansionModule,
+    AuthModule
+  ],
+  providers: [
   ]
 })
 export class LayoutModule { }
